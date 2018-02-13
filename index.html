@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Party Organizer</title>
+    <script src="jquery-3.1.1.min.js"></script>
+    <script src="partyorganizer.js"></script>
+    <script>
+    $(function(){
+      console.log("Jquery loaded successfuly");
+      $("#selection").hide();
+      $("#selection").slideDown(500);
+      $("#selection1").hide();
+      $("#selection1").slideDown(1000);
+      $("#selection2").hide();
+      $("#selection3").hide();
+      $("#selection4").hide();
+      $("#selection5").hide();
+      $("#selection6").hide();
+      $("#selection7").hide();
+
+    //  partyorganizer.listen(function())
+
+      $("#selection1").change(function() {
+        var selection = $(this).val();
+        $("#selection2").slideDown(500);
+      });
+
+      $("#continue1").click(function(){
+        var amountofpeople = $("#peoplecoming").val();
+        console.log("There will be " + amountofpeople + " people attending");
+        $("#selection3").slideDown(500);
+      });
+
+        $("input[name=yesradio]:radio").click(function() {
+      if($(this).attr("value")=="yes") {
+          $("#selection4").show();
+        }else{
+          $("#selection5").show();
+        }
+      });
+
+      $("#button2").click(function(){
+        var amountofvegpeople = $("#vegcoming").val();
+        console.log("There are " + amountofvegpeople + " vegetarians coming to the party");
+        $("#selection5").slideDown(500);
+        $("#selection6").slideDown(500);
+      });
+
+
+        $("#selectfood").on('change',function(){
+          getValue = $(this).val();
+          console.log(getValue + " was selected");
+        });
+
+        $(function(){
+
+        });
+
+
+        $("#continue").click(function(){
+          alert(getValue + " has been inserted into your cart");
+          totalFood = $("#foodamount").val();
+          totalFoodPrice = totalFood * getValue;
+          console.log("total cost " + totalFoodPrice + " and the food chosen " + getValue);
+          $("#totalTable").after("<tr><td>" + getValue + "</td><td>" + totalFoodPrice + "</td></tr>");
+
+        });
+
+        partyorganizer.listen(function(table) {
+          // this is the listener that updates view
+          // every time this callback function is called, we need to update the grid
+            $("#totalTable").empty()
+          });
+
+
+    });
+    </script>
+    <link rel="stylesheet" type="text/css" href="index.css">
+  </head>
+  <body>
+    <h1>Welcome</h1>
+    <h2>Point Park Party Organizer</h2>
+    <div id="selection"class="selection">
+    <div id= "selection1"class="selection1">
+      <form id="form1">
+      <select id="selectparty">
+          <option>Select a type of party</option>
+          <option>Tailgate</option>
+          <option>Graduation</option>
+          <option>Birthday</option>
+          <option>Dinner</option>
+          <option>Retirement</option>
+          <option>Bachelor / Bachelorette</option>
+          <option>Wedding</option>
+      </select>
+      </form>
+    </div>
+    <div id="selection2" class="selection2">
+      <br>
+      <span class="attending"> How many people will be attending? </span><input id="peoplecoming"></input>
+      <button id="continue1">Continue</button>
+      <br>
+      <br>
+    </div>
+
+    <div id="selection3" class="selection3">
+      <form id="vegyesno" action="">
+        <span class="veg">Will there be any Vegetarians or Vegans attending?</span>
+        <br>
+        <input type="radio" id="yesradio" name="yesradio" value="yes"> Yes<br>
+        <input type="radio" id="noradio" name="yesradio" value="no"> No<br>
+      </form>
+      <br>
+    </div>
+
+  <div id="selection4" class="selection4">
+  <span class="vegattending"> How many Vegetarians or Vegans will be attending? </span><input id="vegcoming"></input>
+  <button id="button2">Continue</button>
+  </div>
+  <br>
+  <br>
+
+  <div id="selection5" class="selection5">
+  <span class="attending"> Please select your food options below</span>
+  <form id="form2">
+  <select id="selectfood">
+      <option>Select your food</option>
+      <option value="beef">Ground Beef</option>
+      <option value="chicken">Chicken Breast</option>
+      <option value="pizza">Pizza</option>
+      <option value="sausage">Hot Sausage</option>
+      <option value="pasta">Pasta</option>
+      <option value="hotdog">Hot Dogs</option>
+      <option value="steak">Steak</option>
+      <option value="ribs">Ribs</option>
+      <option>Bacon</option>
+      <option>Mac'n Cheese</option>
+      <option>Salad</option>
+      <option>Asparagus</option>
+      <option>Potatoes</option>
+      <option>Corn</option>
+      <option>Pineapple</option>
+      <option>Oranges</option>
+      <option>Watermelon</option>
+      <option>Canteloupe</option>
+  </select>
+  </form>
+  </div>
+  <br>
+  <div id="selection6" class="selection6">
+  <br>
+  <span class="foodamount"> How many pounds would you like to buy? </span><input id="foodamount"></input>
+  <br>
+  <br>
+  <button id="continue"> Add to cart </button> <!-- This button will open the drink selection dropdown -->
+   <a href="javascript:partyorganizer.resetForm()">Reset</a>
+  </div>
+  <br>
+ <div id="selection7" class="selection7">
+ <span class="attending"> Please select your drink options below</span>
+ <form id="form2">
+ <select id="selectdrink">
+     <option>Select your drink</option>
+     <option>Water</option>
+     <option>Coconut Water</option>
+     <option>Coca Cola</option>
+     <option>Mountain Dew</option>
+     <option>Gatorade</option>
+     <option>Monster</option>
+     <option>RC</option>
+     <option>Ginger Ale</option>
+     <option>Green Tea</option>
+     <option>Maghrebi Mint Tea</option>
+     <option>Hot Chocolate</option>
+     <option>Soy Milk</option>
+     <option>Kombucha</option>
+     <option>Orange Juice</option>
+     <option>Apple Juice</option>
+     <option>Cranberry Juice</option>
+     <option>Hot Coffee</option>
+     <option>Iced Coffee</option>
+ </select>
+ </form>
+ <br>
+ <span class="drinkamount"> How much would you like to buy? </span><input id="drinkamount"></input>
+ <br>
+ <br>
+ <button id="continueCart"> Add to cart </button>
+ <br>
+ </div>
+ <br>
+</div>
+<br>
+<div class="total">
+  <h2>Total</h2>
+    <table id="totalTable">
+      <tr>
+        <th>Item</th>
+        <th>Price</th>
+      </tr>
+      <tr>
+        <td> </td>
+        <td></td>
+      </tr>
+    </table>
+  <br>
+  Your total is:
+  <br>
+  <a href="javascript:partyorganizer.resetCart()">Start Over</a>
+</div>
+</body>
+</html>
