@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <title>Party Organizer</title>
     <script src="jquery-3.1.1.min.js"></script>
+    <script src="partyorganizer.js"></script>
     <script>
-
-    /*$(function(){
+    $(function(){
       console.log("Jquery loaded successfuly");
       $("#selection").hide();
       $("#selection").slideDown(500);
@@ -17,6 +17,9 @@
       $("#selection4").hide();
       $("#selection5").hide();
       $("#selection6").hide();
+      $("#selection7").hide();
+
+    //  partyorganizer.listen(function())
 
       $("#selection1").change(function() {
         var selection = $(this).val();
@@ -31,24 +34,47 @@
 
         $("input[name=yesradio]:radio").click(function() {
       if($(this).attr("value")=="yes") {
-          alert("Yes Selected");
           $("#selection4").show();
+        }else{
+          $("#selection5").show();
         }
       });
 
-      $("#continue2").click(function(){
+      $("#button2").click(function(){
         var amountofvegpeople = $("#vegcoming").val();
-        console.log("There are " + amountofvegpeople + " coming to the party");
+        console.log("There are " + amountofvegpeople + " vegetarians coming to the party");
         $("#selection5").slideDown(500);
         $("#selection6").slideDown(500);
       });
-      var pizza = 8.99;
 
-      $("#continue").click(funtion(){
 
-      });
+        $("#selectfood").on('change',function(){
+          getValue = $(this).val();
+          console.log(getValue + " was selected");
+        });
+
+        $(function(){
+
+        });
+
+
+        $("#continue").click(function(){
+          totalFood = $("#foodamount").val();
+          alert(totalFood + " pounds of " + getValue + " has been inserted into your cart");
+          totalFoodPrice = totalFood * getValue;
+          console.log("total cost " + totalFoodPrice + " and the food chosen " + getValue);
+          $("#totalTable").after("<tr><td>" + getValue + "</td><td>" + totalFoodPrice + "</td></tr>");
+          $("#selection7").slideDown(500);
+        });
+
+        partyorganizer.listen(function(table) {
+          // this is the listener that updates view
+          // every time this callback function is called, we need to update the grid
+            $("#totalTable").empty()
+          });
+
+
     });
-    */
     </script>
     <link rel="stylesheet" type="text/css" href="index.css">
   </head>
@@ -83,7 +109,7 @@
         <span class="veg">Will there be any Vegetarians or Vegans attending?</span>
         <br>
         <input type="radio" id="yesradio" name="yesradio" value="yes"> Yes<br>
-        <input type="radio" id="noradio" name="noradio" value="no"> No<br>
+        <input type="radio" id="noradio" name="yesradio" value="no"> No<br>
       </form>
       <br>
     </div>
@@ -100,14 +126,14 @@
   <form id="form2">
   <select id="selectfood">
       <option>Select your food</option>
-      <option>Ground Beef</option>
-      <option>Chicken Breast</option>
-      <option>Pizza</option>
-      <option>Hot Sausage</option>
-      <option>Pasta</option>
-      <option>Hot Dogs</option>
-      <option>Steak</option>
-      <option>Ribs</option>
+      <option value="beef">Ground Beef</option>
+      <option value="chicken">Chicken Breast</option>
+      <option value="pizza">Pizza</option>
+      <option value="sausage">Hot Sausage</option>
+      <option value="pasta">Pasta</option>
+      <option value="hotdog">Hot Dogs</option>
+      <option value="steak">Steak</option>
+      <option value="ribs">Ribs</option>
       <option>Bacon</option>
       <option>Mac'n Cheese</option>
       <option>Salad</option>
@@ -155,26 +181,33 @@
      <option>Iced Coffee</option>
  </select>
  </form>
- </div>
  <br>
  <span class="drinkamount"> How much would you like to buy? </span><input id="drinkamount"></input>
  <br>
  <br>
- <button id="continue"> Add to cart </button>
+ <button id="continueCart"> Add to cart </button>
+ <a href="javascript:partyorganizer.resetForm()">Reset selections</a>
+ <br>
+ </div>
  <br>
 </div>
 <br>
 <div class="total">
   <h2>Total</h2>
-  <table>
-  <tr>
-    <th>Item</th>
-    <th>Price</th>
-  </tr>
-
-</table>
-<br>
-Your total is:
+    <table id="totalTable">
+      <tr>
+        <th>Item</th>
+        <th>Price</th>
+      </tr>
+      <tr>
+        <td> </td>
+        <td></td>
+      </tr>
+    </table>
+  <br>
+  Your total is:
+  <br>
+  <a href="javascript:partyorganizer.resetCart()">Start Over</a>
 </div>
 </body>
 </html>
