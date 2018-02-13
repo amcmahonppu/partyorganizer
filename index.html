@@ -59,12 +59,12 @@
 
 
         $("#continue").click(function(){
-          alert(getValue + " has been inserted into your cart");
           totalFood = $("#foodamount").val();
+          alert(totalFood + " pounds of " + getValue + " has been inserted into your cart");
           totalFoodPrice = totalFood * getValue;
           console.log("total cost " + totalFoodPrice + " and the food chosen " + getValue);
           $("#totalTable").after("<tr><td>" + getValue + "</td><td>" + totalFoodPrice + "</td></tr>");
-
+          $("#selection7").slideDown(500);
         });
 
         partyorganizer.listen(function(table) {
@@ -154,7 +154,6 @@
   <br>
   <br>
   <button id="continue"> Add to cart </button> <!-- This button will open the drink selection dropdown -->
-   <a href="javascript:partyorganizer.resetForm()">Reset</a>
   </div>
   <br>
  <div id="selection7" class="selection7">
@@ -187,6 +186,7 @@
  <br>
  <br>
  <button id="continueCart"> Add to cart </button>
+ <a href="javascript:partyorganizer.resetForm()">Reset selections</a>
  <br>
  </div>
  <br>

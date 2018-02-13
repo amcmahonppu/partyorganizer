@@ -1,179 +1,33 @@
-
-h1.welcome {
+h1{
   text-align: center;
-  letter-spacing: .1em;
-  color: green;
-  text-shadow: .6px .6px black;
-  padding-top: 15px;
-  font-weight: 900;
-  text-shadow: 0 0 5px rgba(0,0,0,0.5);
-  font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
-  border: 5px solid;
-  border-color: red;
-  margin: auto;
-  margin-right: 400px;
-  margin-left: 400px;
-  padding: 10px;
-  background: orange;
-  padding-top: 25px;
-  padding-left: 20px;
-
-
 }
-body {
-  background: pink;
-  background-image:    url(curtain.jpg);
-    background-size:     cover;
-    background-repeat:   no-repeat;
-    background-position: center center;
-
-}
-
-
-
-h2.party{
+h2{
   text-align: center;
-  letter-spacing: .1em;
-  font-size: 20px;
-  letter-spacing: .1em;
-  color: green;
-  text-shadow: .6px .6px black;
-  font-size: 20px;
-  font-style: bold;
-  font-weight: 900;
-  text-shadow: 0 0 5px rgba(0,0,0,0.5);
-  font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
-  border: 5px solid;
-  border-color: red;
-  margin: auto;
-  margin-right: 400px;
-  margin-left: 400px;
-  padding: 10px;
-  background: orange;
-  padding-top: 25px;
-  padding-left: 20px;
-
 }
 div.selection {
     border: 5px solid;
-    border-color: red;
-    margin: auto;
-    margin-right: 400px;
-    margin-left: 400px;
-    padding: 10px;
-    background: orange;
-    padding-top: 25px;
-    padding-left: 20px;
+    border-color: #F3901D;
+    margin-right: 40%;
+    margin-left: 40%;
+    padding: 5px;
     text-align: center;
-}
-
-span.attending {
-  letter-spacing: .1em;
-  color: blue;
-  text-shadow: .6px .6px black;
-  font-size: 20px;
-  font-style: oblique;
-  line-height: .1em;
-  font-weight: 700;
-  font-family: "Franklin Gothic Medium", "Franklin Gothic", "ITC Franklin Gothic", Arial, sans-serif;
 
 }
+div.total {
+    border: 5px solid;
+    border-color: #F3901D;
+    margin-right: 40%;
+    margin-left: 40%;
+    padding: 5px;
 
-div.selection3 {
-  letter-spacing: .1em;
-  color: blue;
-  text-shadow: .6px .6px black;
-  font-size: 20px;
-  font-style: oblique;
-  font-weight: 700;
-  font-family: "Franklin Gothic Medium", "Franklin Gothic", "ITC Franklin Gothic", Arial, sans-serif;
+}
+table {
+    border-collapse: collapse;
+    width: 100%;
 }
 
-div.selection4 {
-  letter-spacing: .1em;
-  color: blue;
-  text-shadow: .6px .6px black;
-  font-size: 20px;
-  font-style: oblique;
-  font-weight: 700;
-  font-family: "Franklin Gothic Medium", "Franklin Gothic", "ITC Franklin Gothic", Arial, sans-serif;
-}
-
-div.selection5 {
-  letter-spacing: .1em;
-  color: blue;
-  text-shadow: .6px .6px black;
-  font-size: 20px;
-  font-style: oblique;
-  font-weight: 700;
-  font-family: "Franklin Gothic Medium", "Franklin Gothic", "ITC Franklin Gothic", Arial, sans-serif;
-}
-
-div.selection6 {
-  letter-spacing: .1em;
-  color: blue;
-  text-shadow: .6px .6px black;
-  font-size: 20px;
-  font-style: oblique;
-  font-weight: 700;
-  font-family: "Franklin Gothic Medium", "Franklin Gothic", "ITC Franklin Gothic", Arial, sans-serif;
-}
-
-div.selection7 {
-  letter-spacing: .1em;
-  color: blue;
-  text-shadow: .6px .6px black;
-  font-size: 20px;
-  font-style: oblique;
-  font-weight: 700;
-  font-family: "Franklin Gothic Medium", "Franklin Gothic", "ITC Franklin Gothic", Arial, sans-serif;
-}
-
-p {
-  letter-spacing: .1em;
-  color: green;
-  text-shadow: .6px .6px black;
-  font-size: 20px;
-  font-style: bold;
-  font-weight: 700;
-}
-
-th {
-  letter-spacing: .1em;
-  color: green;
-  text-shadow: .6px .6px black;
-  font-size: 20px;
-  font-style: bold;
-  font-weight: 900;
-  text-shadow: 0 0 5px rgba(0,0,0,0.5);
-  font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
-}
-
-h2.totalis {
-  text-align: left;
-  letter-spacing: .1em;
-  font-size: 20px;
-  letter-spacing: .1em;
-  color: green;
-  text-shadow: .6px .6px black;
-  font-size: 20px;
-  font-style: bold;
-  font-weight: 900;
-  text-shadow: 0 0 5px rgba(0,0,0,0.5);
-  font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
-}
-
-h2.total {
-  text-align: left;
-  letter-spacing: .1em;
-  font-size: 20px;
-  letter-spacing: .1em;
-  color: green;
-  text-shadow: .6px .6px black;
-  font-size: 20px;
-  font-style: bold;
-  font-weight: 900;
-  text-shadow: 0 0 5px rgba(0,0,0,0.5);
-  font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
-
+th, td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
 }
