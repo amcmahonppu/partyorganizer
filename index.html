@@ -8,7 +8,7 @@
     <script>
     $(function(){
       console.log("Jquery loaded successfuly");
-      $("#selection").hide();
+      /*$("#selection").hide();
       $("#selection").slideDown(500);
       $("#selection1").hide();
       $("#selection1").slideDown(1000);
@@ -16,18 +16,18 @@
       $("#selection3").hide();
       $("#selection4").hide();
       $("#selection5").hide();
-      $("#selection6").hide();
+      $("#selection6").hide();*/
       $("#selection7").hide();
 
-    //  partyorganizer.listen(function())
-
       $("#selection1").change(function() {
-        var selection = $(this).val();
+        partySelection = $(this).val();
+        partyorganizer.setPartyType(partySelection);
         $("#selection2").slideDown(500);
       });
 
+
       $("#continue1").click(function(){
-        var amountofpeople = $("#peoplecoming").val();
+        amountofpeople = $("#peoplecoming").val();
         console.log("There will be " + amountofpeople + " people attending");
         $("#selection3").slideDown(500);
       });
@@ -37,46 +37,50 @@
           $("#selection4").show();
         }else{
           $("#selection5").show();
+          $("#selection6").show();
         }
       });
 
       $("#button2").click(function(){
-        var amountofvegpeople = $("#vegcoming").val();
+        amountofvegpeople = $("#vegcoming").val();
         console.log("There are " + amountofvegpeople + " vegetarians coming to the party");
         $("#selection5").slideDown(500);
         $("#selection6").slideDown(500);
       });
 
+      var getValue = null;
+      var totalFood = $("#foodamount").val();
 
         $("#selectfood").on('change',function(){
           getValue = $(this).val();
           console.log(getValue + " was selected");
         });
 
-        $(function(){
 
+        $("#addtocartbutton").click(function(){
+          partyorganizer.setFoodAmount(totalFood);
+          partyorganizer.setFoodType(getValue);
+          partyorganizer.setPrice();
+          partyorganizer.addToCart();
+          partyorganizer.getCart();
         });
 
-
-        $("#continue").click(function(){
-          totalFood = $("#foodamount").val();
-          alert(totalFood + " pounds of " + getValue + " has been inserted into your cart");
-          totalFoodPrice = totalFood * getValue;
-          console.log("total cost " + totalFoodPrice + " and the food chosen " + getValue);
-          $("#totalTable").after("<tr><td>" + getValue + "</td><td>" + totalFoodPrice + "</td></tr>");
-          $("#selection7").slideDown(500);
-        });
-
-        partyorganizer.listen(function(table) {
-          // this is the listener that updates view
-          // every time this callback function is called, we need to update the grid
-            $("#totalTable").empty()
+        partyorganizer.listen(function(cart){
+          for (var i=0; i<=cart.length; i++){
+            foodSelection = cart[i].foodType;
+            foodAmountPurchase = cart[i].foodAmount;
+            price = cart[i].price * foodAmount;
+            $("#totalTable").after("<tr><td>" + foodSelection + "</td><td>" + foodAmountPurchase + "</td><td>" + price + "</td></tr>");
+          }
           });
 
+        $("#continueToDrink").click(function(){
+            $("#selection7").slideDown(500);
+          });
 
     });
     </script>
-    <link rel="stylesheet" type="text/css" href="index.css">
+  <link rel="stylesheet" type="text/css" href="index.css">
   </head>
   <body>
     <h1>Welcome</h1>
@@ -126,24 +130,14 @@
   <form id="form2">
   <select id="selectfood">
       <option>Select your food</option>
-      <option value="beef">Ground Beef</option>
-      <option value="chicken">Chicken Breast</option>
-      <option value="pizza">Pizza</option>
-      <option value="sausage">Hot Sausage</option>
-      <option value="pasta">Pasta</option>
-      <option value="hotdog">Hot Dogs</option>
-      <option value="steak">Steak</option>
-      <option value="ribs">Ribs</option>
-      <option>Bacon</option>
-      <option>Mac'n Cheese</option>
-      <option>Salad</option>
-      <option>Asparagus</option>
-      <option>Potatoes</option>
-      <option>Corn</option>
-      <option>Pineapple</option>
-      <option>Oranges</option>
-      <option>Watermelon</option>
-      <option>Canteloupe</option>
+      <option value="Beef">Ground Beef</option>
+      <option value="Chicken">Chicken Breast</option>
+      <option value="Pizza">Pizza</option>
+      <option value="Sausage">Hot Sausage</option>
+      <option value="Pasta">Pasta</option>
+      <option value="Hot Dog">Hot Dogs</option>
+      <option value="Steak">Steak</option>
+      <option value="Ribs">Ribs</option>
   </select>
   </form>
   </div>
@@ -153,7 +147,8 @@
   <span class="foodamount"> How many pounds would you like to buy? </span><input id="foodamount"></input>
   <br>
   <br>
-  <button id="continue"> Add to cart </button> <!-- This button will open the drink selection dropdown -->
+  <button id="addtocartbutton"> Add to cart </button>
+  <button id="continueToDrink">Continue</button> <!-- This button will open the drink selection dropdown -->
   </div>
   <br>
  <div id="selection7" class="selection7">
@@ -200,7 +195,7 @@
         <th>Price</th>
       </tr>
       <tr>
-        <td> </td>
+        <td></td>
         <td></td>
       </tr>
     </table>

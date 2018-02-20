@@ -1,0 +1,24 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Party Organizer API</title>
+  <style>
+  table, td {
+    border-collapse: collapse;
+    border: 1px solid black;
+  }
+  </style>
+</head>
+<body>
+  <h2>Party Organizer API Documentation</h2>
+  This API is for the Party Organizer project. The project helps build a custom party for the amount of people coming to the party. When you include partyoragnizer.js a global variable is created called partyorganizer. All methods should be called on this object. For example, we can set the type of the party by calling the <b>partyorganizer.setPartyType()</b> Below you can find the API:<br><br>
+  <table>
+    <tr><td>Method Name</td><td>Parameters</td><td>Return Value</td></td><td>Description</td></tr>
+    <tr><td>setPartyType(pt)</td><td><i> pt: </i> Passes the value of the party type in the first drop down menu</td><td>None</td></td><td>This method sets the type of party and can be changed whenever the party type is changed in the drop down menu</td></tr>
+    <tr><td>setFoodType(ft)</td><td><i> ft: </i> passes the selected food type in the drop down menu where you select the food you would like to buy</i></td><td>None</td><td>This method sets the type of food and can be changed whenever the food type is changed in the drop down menu</td></tr>
+    <tr><td>setFoodAmount(pd)</td><td><i> fd: </i> passes the selected amount in the input box where you select how much of the food you would like to buy</i></td><td>None</td><td>This method sets the amount of food and cannot be changed whenever the food amount and food type is added to the cart. Can be changed to a different amount when you select a new type of food to buy</td></tr>
+    <tr><td>listen(cb)</td><td><i>cb:</i> is the callback function. This function will be called when the cart changes. The cart is passed to the callback function</td><td>None</td><td>The listen(cb) functionality is used to track change in the model and receive notifications. This allows the UI to be updated when the model changes.</td></tr>
+  </table>
+</body>
+</html>
