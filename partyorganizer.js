@@ -5,10 +5,41 @@ var partyorganizer = (function(){
   var numberOfVegPeople = null;
   var foodType = null;
   var pounds = null;
-  var price = null;
+  var foodPrice = null;
+  var drinkPrice = null;
   var drinkType = null;
+  var drinkAmount = null;
   var amountToBuy = null;
   var foodAmount =  null;
+  var discountName = null;
+  var discountPrice = null;
+  var discountCodes = [{
+    name: "PointPark",
+    discount: .20
+  }];
+  var drinkOptions = [{
+     name: "Water",
+     price: 1.99
+   }, {
+     name: "Coconut Water",
+     price: 2.99
+   }, {
+     name: "Coca Cola",
+     price: 1.99
+
+   }, {
+     name: "Mountain Dew",
+     price: 1.99
+
+   }, {
+     name: "Gatorade",
+     price: 2.99
+
+   }, {
+     name: "Monster",
+     price: 3.99
+   }];
+
   var foodOptions = [{
     name: "Beef",
     price: 8.99
@@ -33,7 +64,28 @@ var partyorganizer = (function(){
   }, {
     name: "Ribs",
     price: 14.99
+  },{
+    name: "Black Bean Burger",
+    price: 5.99
+  },{
+    name: "Tofu",
+    price: 2.50
+  },{
+    name: "Mac and Cheese",
+    price: 7.50
   }];
+
+  function setDiscountName(dn){
+    discountName = dn;
+  }
+
+  function setDiscountPrice(){
+    for(var i = 0; i<discountCodes.length; i++){
+      if(discountName === discountCodes[i].name){
+        discountPrice = discountCodes[i].price;
+      }
+    }
+  }
 
   function setPartyType(pt){
     partyType = pt;
@@ -41,6 +93,10 @@ var partyorganizer = (function(){
 
   function setFoodAmount(pd){
     foodAmount = pd;
+  }
+
+  function setDrinkAmount(dr){
+    drinkAmount = dr;
   }
 
   function setFoodType(ft){
@@ -54,21 +110,39 @@ var partyorganizer = (function(){
   function setPrice(){
     for(var i = 0; i<foodOptions.length; i++){
       if(foodType === foodOptions[i].name){
-        price = foodOptions[i].price;
+        foodPrice = foodOptions[i].price;
+      }
+    }
+  }
+
+  function setDrinkPrice(){
+    for(var i = 0; i<drinkOptions.length; i++){
+      if(drinkType === drinkOptions[i].name){
+        drinkPrice = drinkOptions[i].price;
       }
     }
   }
 
   function addToCart(){
-    cart.push({
-      foodType: foodType,
-      foodAmount: foodAmount,
-      price: setPrice()
-    });
+      cart.push({
+        foodType: foodType,
+        foodAmount: foodAmount,
+        foodPrice: foodPrice,
+        drinkType: drinkType,
+        drinkAmount: drinkAmount,
+        drinkPrice: drinkPrice,
+        discountPrice: discountPrice
+      });
     foodType = null;
     foodAmount = null;
-    price = null;
+    foodPrice = null;
+    drinkType = null;
+    drinkAmount = null;
+    drinkPrice = null;
+    notify();
   }
+
+
 
   function getCart(){
     return cart;
@@ -90,8 +164,8 @@ var partyorganizer = (function(){
     notify();
   }
 
-  function resetCart(table){
-    totalTable = null;
+  function resetCart(cart){
+    cart = null;
     notify();
   }
 
@@ -116,6 +190,11 @@ var partyorganizer = (function(){
     resetCart: resetCart,
     setFoodType: setFoodType,
     setFoodAmount: setFoodAmount,
+    setDrinkAmount: setDrinkAmount,
+    setDrinkType: setDrinkType,
+    setDrinkPrice: setDrinkPrice,
+    setDiscountName: setDiscountName,
+    setDiscountPrice: setDiscountPrice,
     setPrice: setPrice,
     addToCart: addToCart,
     getCart: getCart,

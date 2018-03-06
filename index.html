@@ -8,7 +8,7 @@
     <script>
     $(function(){
       console.log("Jquery loaded successfuly");
-      /*$("#selection").hide();
+      $("#selection").hide();
       $("#selection").slideDown(500);
       $("#selection1").hide();
       $("#selection1").slideDown(1000);
@@ -16,7 +16,7 @@
       $("#selection3").hide();
       $("#selection4").hide();
       $("#selection5").hide();
-      $("#selection6").hide();*/
+      $("#selection6").hide();
       $("#selection7").hide();
 
       $("#selection1").change(function() {
@@ -28,28 +28,25 @@
 
       $("#continue1").click(function(){
         amountofpeople = $("#peoplecoming").val();
-        console.log("There will be " + amountofpeople + " people attending");
         $("#selection3").slideDown(500);
       });
 
         $("input[name=yesradio]:radio").click(function() {
       if($(this).attr("value")=="yes") {
-          $("#selection4").show();
+          $("#selection4").slideDown(500);
         }else{
-          $("#selection5").show();
-          $("#selection6").show();
+          $("#selection5").slideDown(500);
         }
       });
 
       $("#button2").click(function(){
         amountofvegpeople = $("#vegcoming").val();
-        console.log("There are " + amountofvegpeople + " vegetarians coming to the party");
         $("#selection5").slideDown(500);
         $("#selection6").slideDown(500);
       });
 
       var getValue = null;
-      var totalFood = $("#foodamount").val();
+
 
         $("#selectfood").on('change',function(){
           getValue = $(this).val();
@@ -58,25 +55,56 @@
 
 
         $("#addtocartbutton").click(function(){
-          partyorganizer.setFoodAmount(totalFood);
+          partyorganizer.setFoodAmount(Number($("#foodamount").val()));
           partyorganizer.setFoodType(getValue);
           partyorganizer.setPrice();
           partyorganizer.addToCart();
-          partyorganizer.getCart();
+          $("#foodamount").val("");
+        });
+
+        $("#selectdrink").on('change',function(){
+          getValueDrink = $(this).val();
+          console.log(getValueDrink + " was selected");
+        });
+
+        $("#drinkCart").click(function(){
+          partyorganizer.setDrinkAmount(Number($("#drinkamount").val()));
+          partyorganizer.setDrinkType(getValueDrink);
+          partyorganizer.setDrinkPrice();
+          partyorganizer.addToCart();
+          $("#drinkamount").val("");
         });
 
         partyorganizer.listen(function(cart){
-          for (var i=0; i<=cart.length; i++){
+          $("#totalTable").empty();
+          $("#totalTable").append("<tr><th> Item </th><th>Quantity</th><th>Price</th></tr>");
+          drinkTotal = 0;
+          foodTotal = 0;
+          totalCost = 0;
+          for (var i=0; i<cart.length; i++){
             foodSelection = cart[i].foodType;
             foodAmountPurchase = cart[i].foodAmount;
-            price = cart[i].price * foodAmount;
-            $("#totalTable").after("<tr><td>" + foodSelection + "</td><td>" + foodAmountPurchase + "</td><td>" + price + "</td></tr>");
+            drinkAmountPurchase = cart[i].drinkAmount;
+            drinkSelection = cart[i].drinkType;
+            drinkPrice = cart[i].drinkPrice * drinkAmountPurchase;
+            price = cart[i].foodPrice * foodAmountPurchase;
+            console.log(cart[i].foodPrice + " " + foodAmountPurchase);
+            if(cart[i].drinkType === null){
+              $("#totalTable").append("<tr><td>" + foodSelection + "</td><td>" + foodAmountPurchase + "</td><td>" + price + "</td></tr>");
+            }else{
+              $("#totalTable").append("<tr><td>" + drinkSelection + "</td><td>" + drinkAmountPurchase + "</td><td>" + drinkPrice + "</td></tr>");
+            }
+            drinkTotal += drinkPrice;
+            foodTotal += price;
           }
-          });
+          console.log(drinkTotal);
+          console.log(foodTotal);
+          total = Math.round(drinkTotal * 100)/100 + Math.round(foodTotal * 100)/100;
+          totalCost = Math.round(total * 100)/100;
+          console.log("Your total is " + totalCost);
+          document.getElementById("totalCost").innerHTML = totalCost;
+        });
 
-        $("#continueToDrink").click(function(){
-            $("#selection7").slideDown(500);
-          });
 
     });
     </script>
@@ -140,51 +168,35 @@
       <option value="Ribs">Ribs</option>
   </select>
   </form>
-  </div>
   <br>
-  <div id="selection6" class="selection6">
   <br>
   <span class="foodamount"> How many pounds would you like to buy? </span><input id="foodamount"></input>
   <br>
   <br>
   <button id="addtocartbutton"> Add to cart </button>
-  <button id="continueToDrink">Continue</button> <!-- This button will open the drink selection dropdown -->
-  </div>
   <br>
- <div id="selection7" class="selection7">
+  <br>
  <span class="attending"> Please select your drink options below</span>
  <form id="form2">
  <select id="selectdrink">
      <option>Select your drink</option>
-     <option>Water</option>
-     <option>Coconut Water</option>
-     <option>Coca Cola</option>
-     <option>Mountain Dew</option>
-     <option>Gatorade</option>
-     <option>Monster</option>
-     <option>RC</option>
-     <option>Ginger Ale</option>
-     <option>Green Tea</option>
-     <option>Maghrebi Mint Tea</option>
-     <option>Hot Chocolate</option>
-     <option>Soy Milk</option>
-     <option>Kombucha</option>
-     <option>Orange Juice</option>
-     <option>Apple Juice</option>
-     <option>Cranberry Juice</option>
-     <option>Hot Coffee</option>
-     <option>Iced Coffee</option>
+     <option value="Water">Water</option>
+     <option value="Coconut Water">Coconut Water</option>
+     <option value="Coca Cola">Coca Cola</option>
+     <option value="Mountain Dew">Mountain Dew</option>
+     <option value="Gatorade">Gatorade</option>
+     <option value="Monster">Monster</option>
  </select>
  </form>
  <br>
  <span class="drinkamount"> How much would you like to buy? </span><input id="drinkamount"></input>
  <br>
  <br>
- <button id="continueCart"> Add to cart </button>
+ <button id="drinkCart"> Add to cart </button>
  <a href="javascript:partyorganizer.resetForm()">Reset selections</a>
  <br>
- </div>
  <br>
+</div>
 </div>
 <br>
 <div class="total">
@@ -192,6 +204,7 @@
     <table id="totalTable">
       <tr>
         <th>Item</th>
+        <th>Quantity</th>
         <th>Price</th>
       </tr>
       <tr>
@@ -200,7 +213,7 @@
       </tr>
     </table>
   <br>
-  Your total is:
+  Your total is: <p id="totalCost"></p>
   <br>
   <a href="javascript:partyorganizer.resetCart()">Start Over</a>
 </div>
